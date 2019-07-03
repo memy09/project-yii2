@@ -119,7 +119,7 @@ class Person extends \yii\mongodb\ActiveRecord
                     $initial[] = [
                         'caption'=> $value,
                         'width'  => '120px',
-                        'url'    => Url::to(['/person/deletefile','_id'=>$this->user_id,'fileName'=>$key,'field'=>$field]),
+                        'url'    => Url::to(['@web/personal/person/deletefile','_id'=>$this->user_id,'fileName'=>$key,'field'=>$field]),
                         'key'    => $key
                     ];
                 }
