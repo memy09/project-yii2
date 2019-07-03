@@ -10,6 +10,7 @@ use yii\helpers\Url;
 
 $this->title = 'People';
 $this->params['breadcrumbs'][] = $this->title;
+$data = new Spreadsheet_Excel_Reader("example.xls");
 ?>
 <div class="person-index">
 
@@ -40,19 +41,30 @@ $this->params['breadcrumbs'][] = $this->title;
             'address',
             [
                 'label' => 'รูป',
-                'format' => 'raw',
+                'format' => 'html',
                 'attribute' => 'img',
 
                 'value' => function ($model) {
-                    $content = '';
+                   $content = '';
 
 
-                    foreach ($model->img as $item){
-                        $content = $content.Html::img('@web/uploads/person/'.$item,['width'=>'150','height'=>'200']).'<br>';
-                    }
-                  return $content;
+//
+//                      foreach ($model->img as $item) {
+//                          $content = $content . Html::img('@web/uploads/person/' . $item, ['width' => '150', 'height' => '200']) ;
+//
+//                      }
+//                      return $content;
 
-                }
+
+                       foreach ($model->img as $item) {
+                      $content = $content . Html::a($item, '@web/uploads/person/' . $item,
+                      ['class' => 'btn btn-primary','target' => '_blank',],['width' => '150', 'height' => '200']);
+                      }
+                      return $content;
+                  }
+
+
+
             ],
 
             //'dept',
@@ -61,5 +73,5 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ]); ?>
 
-
+    <?php echo $data->dump(true,true); ?>
 </div>
